@@ -451,8 +451,6 @@ contract SafeDefyOwner is Ownable {
 
     DefyMaster public defyMaster;
     
-    event LogError(string message);
-    
     constructor(DefyMaster _defyMaster) public {
         defyMaster = _defyMaster;
     }
