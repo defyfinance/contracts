@@ -501,15 +501,12 @@ contract SafeDefyOwner is Ownable {
 
     try IDefySwapPair(_lpToken).token0() returns (address token0) {
             _token0 = IERC20(token0);
+            _token1 = IERC20(IDefySwapPair(_lpToken).token1());
         }
     catch {
             _token0 = IERC20(_lpToken);
-        }
-    try IDefySwapPair(_lpToken).token1() returns (address token1) {
-            _token1 = IERC20(token1);
-        }
-    catch  {
             _token1 = IERC20(_lpToken);
+            _offerILP = false;
         }
         
         
@@ -546,15 +543,12 @@ contract SafeDefyOwner is Ownable {
 
     try IDefySwapPair(lpToken).token0() returns (address token0) {
             _token0 = IERC20(token0);
+            _token1 = IERC20(IDefySwapPair(lpToken).token1());
         }
     catch {
             _token0 = IERC20(lpToken);
-        }
-    try IDefySwapPair(lpToken).token1() returns (address token1) {
-            _token1 = IERC20(token1);
-        }
-    catch {
             _token1 = IERC20(lpToken);
+            _offerILP = false;
         }
         
         require(_depositFee <= 600, "Add : Max Deposit Fee is 6%");
@@ -565,6 +559,7 @@ contract SafeDefyOwner is Ownable {
          _issueSTUB, _rewardEndTimestamp);
             
     }
+
 
 }
 
