@@ -560,9 +560,4 @@ contract SafeDefyOwner is Ownable {
             
     }
 
-
 }
-
-
-
-    
