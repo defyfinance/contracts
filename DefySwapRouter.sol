@@ -581,7 +581,6 @@ contract DefySwapRouter is IDefySwapRouter02 {
             TransferHelper.safeTransfer(token, to, IERC20(token).balanceOf(address(this)));
         }
         
-        TransferHelper.safeTransfer(token, to, IERC20(token).balanceOf(address(this)));
         IWETH(WETH).withdraw(amountETH);
         TransferHelper.safeTransferETH(to, amountETH);
     }
