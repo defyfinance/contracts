@@ -727,6 +727,7 @@ contract DefyRefunder is Ownable, ReentrancyGuard {
     // Distribute tokens.
     function distributeUSDC() external onlyDev returns(bool){
         require(usdc.balanceOf(address(this)) > 0 ,'Nothing to distribute');
+        require(!distributionEnd  , 'distribution already ended');
 
         for (uint i = 0 ; i < userAddrList.length ; i++)
         {
@@ -746,6 +747,7 @@ contract DefyRefunder is Ownable, ReentrancyGuard {
     
     //claim refund
     function claimRefund() external returns(bool){
+        require(block.timestamp > startTime , "distribution not started!");
         require (userList[msg.sender].inList , "Error : Unknown user ");
         uint256 pending = userList[msg.sender].amount;
         require (pending > 0 , 'Nothing to claim');
